@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Myanmar Postcode Directory | မြန်မာနိုင်ငံ စာပို့ကုဒ်</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --gold:       #d4a017;
+    --gold-light: #f0c040;
+    --gold-pale:  #f8e98a;
+    --ruby:       #9b2335;
+    --deep:       #0d0a05;
+    --panel:      #1a1208;
+    --surface:    #231a09;
+    --border:     #3a2d12;
+    --text:       #e8dcc0;
+    --muted:      #9a8a6a;
+    --white:      #fff8ee;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--deep);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212,160,23,.13) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 20% 80%, rgba(155,35,53,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(212,160,23,.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Subtle grid pattern */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(212,160,23,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,160,23,.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pagoda-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 16px rgba(212,160,23,.6));
+    animation: floatGlow 4s ease-in-out infinite;
+  }
+  @keyframes floatGlow {
+    0%,100% { transform: translateY(0);   filter: drop-shadow(0 0 16px rgba(212,160,23,.6)); }
+    50%      { transform: translateY(-6px); filter: drop-shadow(0 0 28px rgba(212,160,23,.9)); }
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: .04em;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: .95rem;
+    letter-spacing: .06em;
+  }
+
+  .divider {
+    width: 120px;
+    height: 2px;
+    margin: 20px auto 0;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  /* ── STATS BAR ── */
+  .stats {
+    position: relative; z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: var(--gold-light);
+    display: block;
+  }
+  .stat-label { font-size: .75rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+  /* ── SEARCH / FILTER BAR ── */
+  .controls {
+    position: relative; z-index: 10;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+  }
+  .search-icon {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 1rem;
+    pointer-events: none;
+  }
+  input[type="search"] {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Lora', serif;
+    font-size: .95rem;
+    padding: 12px 14px 12px 42px;
+    outline: none;
+    transition: border-color .25s, box-shadow .25s;
+  }
+  input[type="search"]:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,160,23,.15);
+  }
+  input[type="search"]::placeholder { color: var(--muted); }
+
+  select {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Lora', serif;
+    font-size: .9rem;
+    padding: 12px 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color .25s;
+    min-width: 180px;
+  }
+  select:focus { border-color: var(--gold); }
+  select option { background: var(--panel); }
+
+  .result-count {
+    font-size: .82rem;
+    color: var(--muted);
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .result-count span { color: var(--gold); font-style: normal; font-weight: 600; }
+
+  /* ── REGION SECTIONS ── */
+  main {
+    position: relative; z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  .region {
+    margin-bottom: 36px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--panel);
+    transition: opacity .2s;
+  }
+  .region.hidden { display: none; }
+
+  .region-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    background: linear-gradient(90deg, rgba(212,160,23,.12), transparent);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .region-header:hover { background: linear-gradient(90deg, rgba(212,160,23,.18), transparent); }
+
+  .region-flag {
+    font-size: 1.4rem;
+  }
+
+  .region-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    letter-spacing: .05em;
+    flex: 1;
+  }
+
+  .region-count {
+    font-size: .75rem;
+    background: rgba(212,160,23,.15);
+    color: var(--gold);
+    border: 1px solid rgba(212,160,23,.3);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-family: 'Cinzel', serif;
+  }
+
+  .chevron {
+    color: var(--gold);
+    transition: transform .3s;
+    font-size: .85rem;
+  }
+  .region.collapsed .chevron { transform: rotate(-90deg); }
+  .region.collapsed .grid { display: none; }
+
+  /* ── POSTCODE GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .card {
+    background: var(--surface);
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background .18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--border);
+    transition: background .18s;
+  }
+  .card:hover { background: rgba(212,160,23,.07); }
+  .card:hover::before { background: var(--gold); }
+  .card.hidden { display: none; }
+
+  .city-name {
+    font-family: 'Lora', serif;
+    font-size: .95rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+  .city-burmese {
+    font-size: .8rem;
+    color: var(--muted);
+  }
+  .postcode {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--gold-light);
+    margin-top: 4px;
+    letter-spacing: .1em;
+  }
+
+  /* ── NO RESULTS ── */
+  #no-results {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  #no-results .icon { font-size: 2.5rem; display: block; margin-bottom: 12px; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: .8rem;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── SCROLL TOP ── */
+  #scrollTop {
+    position: fixed; bottom: 28px; right: 28px; z-index: 100;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--deep);
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(212,160,23,.4);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+  }
+  #scrollTop.visible { opacity: 1; pointer-events: auto; }
+  #scrollTop:hover { background: var(--gold-light); }
+
+  @media (max-width: 500px) {
+    .stats { gap: 24px; }
+    .controls { flex-direction: column; }
+    select { min-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="pagoda-icon">🏯</span>
+  <h1>Myanmar Postcode Directory</h1>
+  <p class="subtitle">မြန်မာနိုင်ငံ · စာပို့ကုဒ်များ · All States & Regions</p>
+  <div class="divider"></div>
+</header>
+
+<div class="stats">
+  <div class="stat">
+    <span class="stat-num" id="total-cities">—</span>
+    <span class="stat-label">Cities / Townships</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">14</span>
+    <span class="stat-label">States & Regions</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">5</span>
+    <span class="stat-label">Digit Postcodes</span>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="search" id="search" placeholder="Search city, postcode…" autocomplete="off" />
+  </div>
+  <select id="region-filter">
+    <option value="">All Regions / States</option>
+  </select>
+  <span class="result-count" id="result-count"></span>
+</div>
+
+<main id="main"></main>
+<div id="no-results">
+  <span class="icon">🔎</span>
+  No cities found. Try a different search.
+</div>
+
+<footer>
+  Myanmar Postcode Directory &nbsp;·&nbsp; Data based on Myanmar Posts & Telecommunications
+  &nbsp;·&nbsp; <a href="https://github.com">GitHub Pages</a>
+</footer>
+
+<button id="scrollTop" title="Back to top">▲</button>
+
+<script>
+const DATA = [
+  // ── AYEYARWADY REGION ─────────────────────────────────────────────────
+  { r:"Ayeyarwady Region", rb:"အင်္ဂရာဝတီတိုင်းဒေသကြီး", e:"🌊",
+    cities:[
+      { n:"Pathein",     b:"ပုသိမ်",       p:"11201" },
+      { n:"Myaungmya",   b:"မြောင်းမြ",     p:"11401" },
+      { n:"Maubin",      b:"မော်ဘင်",       p:"11501" },
+      { n:"Pyapon",      b:"ဖျာပုံ",         p:"11601" },
+      { n:"Hinthada",    b:"ဟင်္သာတ",       p:"11701" },
+      { n:"Wakema",      b:"ဝါးခယ်မ",       p:"11801" },
+      { n:"Labutta",     b:"လပွတ္တာ",        p:"11901" },
+      { n:"Danubyu",     b:"ဒါနုဗျူး",       p:"11301" },
+      { n:"Bogale",      b:"ဘိုကလေး",       p:"11451" },
+      { n:"Kyaiklat",    b:"ကျိုက်လတ်",     p:"11251" },
+      { n:"Dedaye",      b:"ဒေးဒရဲ",         p:"11551" },
+      { n:"Ingapu",      b:"အင်္ကြင်းပူ",   p:"11761" },
+      { n:"Einme",       b:"အိမ်မဲ",         p:"11851" },
+      { n:"Kyangin",     b:"ကြံကြင်",        p:"11651" },
+    ]
+  },
+  // ── BAGO REGION ───────────────────────────────────────────────────────
+  { r:"Bago Region", rb:"ပဲခူးတိုင်းဒေသကြီး", e:"🏛️",
+    cities:[
+      { n:"Bago",          b:"ပဲခူး",         p:"12001" },
+      { n:"Taungoo",       b:"တောင်ငူ",       p:"12101" },
+      { n:"Pyay",          b:"ပြည်",           p:"12201" },
+      { n:"Thayarwady",    b:"သာယာဝတီ",      p:"12301" },
+      { n:"Paukkhaung",    b:"ပေါက်ခေါင်",   p:"12251" },
+      { n:"Kyaukkyi",      b:"ကျောက်ကြီး",   p:"12151" },
+      { n:"Padaung",       b:"ပိန်တောင်",     p:"12401" },
+      { n:"Shwedaung",     b:"ရွှေတောင်",     p:"12231" },
+      { n:"Letpadan",      b:"လက်ပံတန်း",    p:"12501" },
+      { n:"Zigon",         b:"ဇီးကုန်း",      p:"12351" },
+      { n:"Nattalin",      b:"နတ္တလင်း",      p:"12451" },
+      { n:"Monyo",         b:"မုန်းရိုး",      p:"12551" },
+      { n:"Okpho",         b:"အုတ်ဖို",       p:"12611" },
+      { n:"Thanatpin",     b:"သနပ်ပင်",       p:"12001" },
+    ]
+  },
+  // ── CHIN STATE ────────────────────────────────────────────────────────
+  { r:"Chin State", rb:"ချင်းပြည်နယ်", e:"⛰️",
+    cities:[
+      { n:"Hakha",      b:"ဟားခါး",    p:"03001" },
+      { n:"Falam",      b:"ဖလမ်း",     p:"03101" },
+      { n:"Mindat",     b:"မင်းတပ်",   p:"03201" },
+      { n:"Matupi",     b:"မတူပီ",     p:"03301" },
+      { n:"Paletwa",    b:"ပလက်ဝ",     p:"03401" },
+      { n:"Thantlang",  b:"သန်တလန်",   p:"03501" },
+      { n:"Tedim",      b:"တီးတိန်",   p:"03601" },
+      { n:"Tonzang",    b:"တွန်းဇံ",   p:"03651" },
+      { n:"Kanpetlet",  b:"ကန်ပက်လက်", p:"03221" },
+      { n:"Rezua",      b:"ရေဇွာ",     p:"03701" },
+    ]
+  },
+  // ── KACHIN STATE ──────────────────────────────────────────────────────
+  { r:"Kachin State", rb:"ကချင်ပြည်နယ်", e:"🌲",
+    cities:[
+      { n:"Myitkyina",  b:"မြစ်ကြီးနား", p:"01001" },
+      { n:"Bhamo",      b:"ဗန်းမော်",    p:"01101" },
+      { n:"Mogaung",    b:"မိုးကောင်း",  p:"01201" },
+      { n:"Mohnyin",    b:"မိုးညင်း",    p:"01301" },
+      { n:"Putao",      b:"ပူတာအို",     p:"01401" },
+      { n:"Hpakant",    b:"ဖားကန့်",     p:"01501" },
+      { n:"Shwegu",     b:"ရွှေကူ",      p:"01601" },
+      { n:"Waingmaw",   b:"ဝိုင်းမော်",  p:"01051" },
+      { n:"Mansi",      b:"မန်စီ",       p:"01351" },
+      { n:"Injangyang", b:"အင်ဂျန်းယာင်", p:"01451" },
+    ]
+  },
+  // ── KAYAH STATE ───────────────────────────────────────────────────────
+  { r:"Kayah State", rb:"ကယားပြည်နယ်", e:"🏕️",
+    cities:[
+      { n:"Loikaw",    b:"လွိုင်ကော်",  p:"08001" },
+      { n:"Demoso",    b:"ဒီမောဆို",    p:"08101" },
+      { n:"Bawlakhe",  b:"ဘော်လခဲ",    p:"08201" },
+      { n:"Mese",      b:"မဲဆဲ",        p:"08301" },
+      { n:"Hpasawng",  b:"ဖာဆောင်း",   p:"08401" },
+      { n:"Shadaw",    b:"ရှားတော",     p:"08501" },
+      { n:"Kyebogyi",  b:"ကြေးဘိုကြီး", p:"08601" },
+    ]
+  },
+  // ── KAYIN STATE ───────────────────────────────────────────────────────
+  { r:"Kayin State", rb:"ကရင်ပြည်နယ်", e:"🌿",
+    cities:[
+      { n:"Hpa-An",       b:"ဘားအံ",        p:"07001" },
+      { n:"Myawaddy",     b:"မြဝတီ",         p:"07101" },
+      { n:"Kawkareik",    b:"ကော်သရဲ",       p:"07201" },
+      { n:"Kyainseikgyi", b:"ကျိုင်းစိန်ကြီး", p:"07301" },
+      { n:"Thandaunggyi", b:"သံတောင်ကြီး",   p:"07401" },
+      { n:"Hlaingbwe",    b:"လှိုင်းဘွဲ",    p:"07451" },
+      { n:"Pharpon",      b:"ဖားပွန်",        p:"07501" },
+    ]
+  },
+  // ── MAGWAY REGION ─────────────────────────────────────────────────────
+  { r:"Magway Region", rb:"မကွေးတိုင်းဒေသကြီး", e:"🛢️",
+    cities:[
+      { n:"Magway",         b:"မကွေး",        p:"02001" },
+      { n:"Pakokku",        b:"ပခုက္ကူ",      p:"02101" },
+      { n:"Thayetmyo",      b:"သရေတော်မြို့",  p:"02201" },
+      { n:"Minbu",          b:"မင်းဘူး",       p:"02301" },
+      { n:"Gangaw",         b:"ဂန့်ဂေါ",       p:"02401" },
+      { n:"Tilin",          b:"တိလင်",         p:"02501" },
+      { n:"Aunglan",        b:"အောင်လံ",        p:"02601" },
+      { n:"Chauk",          b:"ချောက်",         p:"02801" },
+      { n:"Yenangyaung",    b:"ရေနံချောင်း",   p:"02851" },
+      { n:"Kyaukpadaung",   b:"ကျောက်ပန်းတောင်း", p:"02901" },
+      { n:"Natmauk",        b:"နတ်မောက်",      p:"02951" },
+      { n:"Myothit",        b:"မြို့သစ်",       p:"02651" },
+      { n:"Sinbaungwe",     b:"သင်းပေါင်းဝဲ",  p:"02701" },
+      { n:"Pwintbyu",       b:"ပြင်ဦးလွင်",    p:"02351" },
+    ]
+  },
+  // ── MANDALAY REGION ───────────────────────────────────────────────────
+  { r:"Mandalay Region", rb:"မန္တလေးတိုင်းဒေသကြီး", e:"👑",
+    cities:[
+      { n:"Mandalay",      b:"မန္တလေး",      p:"05001" },
+      { n:"Meiktila",      b:"မိတ္ထီလာ",     p:"05101" },
+      { n:"Myingyan",      b:"မြင်းခြံ",      p:"05201" },
+      { n:"Kyaukse",       b:"ကျောက်ဆည်",   p:"05301" },
+      { n:"Yamethin",      b:"ရမည်းသင်း",    p:"05401" },
+      { n:"Pyin Oo Lwin",  b:"ပြင်ဦးလွင်",   p:"05051" },
+      { n:"Mogok",         b:"မိုးကုတ်",      p:"05701" },
+      { n:"Natogyi",       b:"နတ်တောင်ကြီး", p:"05251" },
+      { n:"Wundwin",       b:"ဝမ်းတွင်း",     p:"05351" },
+      { n:"Madaya",        b:"မတ္တရာ",        p:"05601" },
+      { n:"Singu",         b:"ဆင်ကူ",         p:"05551" },
+      { n:"Thabeikkyin",   b:"သပိတ်ကျင်",    p:"05651" },
+      { n:"Tada-U",        b:"တာဒါဦး",        p:"05011" },
+      { n:"Patheingyi",    b:"ပသိန်ကြီ",      p:"05021" },
+      { n:"Mahlaing",      b:"မလှိုင်",        p:"05261" },
+      { n:"Pyawbwe",       b:"ပြောဘွဲ",        p:"05451" },
+      { n:"Ngazun",        b:"ငဇွန်",          p:"05311" },
+      { n:"Amarapura",     b:"အမရပူရ",        p:"05021" },
+    ]
+  },
+  // ── MON STATE ─────────────────────────────────────────────────────────
+  { r:"Mon State", rb:"မွန်ပြည်နယ်", e:"⛵",
+    cities:[
+      { n:"Mawlamyine",    b:"မော်လမြိုင်",   p:"15001" },
+      { n:"Thaton",        b:"သထုံ",           p:"15101" },
+      { n:"Kyaikto",       b:"ကျိုက်ထို",      p:"15201" },
+      { n:"Bilin",         b:"ဘီးလင်း",        p:"15301" },
+      { n:"Ye",            b:"ရေ",             p:"15401" },
+      { n:"Mudon",         b:"မုဒုံ",           p:"15501" },
+      { n:"Chaungzon",     b:"ချောင်းဆုံ",     p:"15551" },
+      { n:"Kyaikmaraw",    b:"ကျိုက်မာရော်",   p:"15601" },
+      { n:"Thanbyuzayat",  b:"သံဖြူဇရပ်",     p:"15701" },
+      { n:"Kawkareik",     b:"ကော်သရဲ",        p:"15801" },
+    ]
+  },
+  // ── NAYPYIDAW UNION TERRITORY ─────────────────────────────────────────
+  { r:"Naypyidaw Union Territory", rb:"နေပြည်တော်ပြည်ထောင်စုနယ်မြေ", e:"🏛️",
+    cities:[
+      { n:"Naypyidaw",     b:"နေပြည်တော်",    p:"15011" },
+      { n:"Ottarathiri",   b:"ဥတ္တရသီရိ",     p:"15011" },
+      { n:"Dekkhinathiri", b:"ဒက္ခိဏသီရိ",    p:"15017" },
+      { n:"Zabuthiri",     b:"ဇဗ္ဗူသီရိ",     p:"15015" },
+      { n:"Pobbathiri",    b:"ပုဗ္ဗသီရိ",     p:"15016" },
+      { n:"Pyinmana",      b:"ပြည်မနား",       p:"15081" },
+      { n:"Lewe",          b:"လယ်ဝေး",         p:"15071" },
+      { n:"Tatkon",        b:"တပ်ကုန်း",       p:"15091" },
+      { n:"Oaktwin",       b:"အုတ်တွင်း",      p:"15101" },
+    ]
+  },
+  // ── RAKHINE STATE ─────────────────────────────────────────────────────
+  { r:"Rakhine State", rb:"ရခိုင်ပြည်နယ်", e:"🌅",
+    cities:[
+      { n:"Sittwe",      b:"စစ်တွေ",       p:"10001" },
+      { n:"Kyaukphyu",   b:"ကျောက်ဖြူ",    p:"10101" },
+      { n:"Maungdaw",    b:"မောင်တော",      p:"10201" },
+      { n:"Buthidaung",  b:"ဘူးသီးတောင်",  p:"10301" },
+      { n:"Thandwe",     b:"သံတွဲ",         p:"10401" },
+      { n:"Toungup",     b:"တောင်ကုပ်",     p:"10501" },
+      { n:"Minbya",      b:"မင်းဘြား",      p:"10601" },
+      { n:"Myebon",      b:"မြေဗြောင်",     p:"10701" },
+      { n:"Pauktaw",     b:"ပေါက်တော",      p:"10801" },
+      { n:"Rathedaung",  b:"ရသေ့တောင်",    p:"10901" },
+      { n:"Ann",         b:"အမ်",           p:"10951" },
+      { n:"Mrauk-U",     b:"မြောက်ဦး",     p:"10011" },
+      { n:"Gwa",         b:"ဂွ",            p:"10451" },
+      { n:"Taungup",     b:"တောင်ကုပ်",     p:"10501" },
+      { n:"Munaung",     b:"မူနောင်",       p:"10751" },
+    ]
+  },
+  // ── SAGAING REGION ────────────────────────────────────────────────────
+  { r:"Sagaing Region", rb:"စစ်ကိုင်းတိုင်းဒေသကြီး", e:"🏔️",
+    cities:[
+      { n:"Sagaing",    b:"စစ်ကိုင်း",     p:"04001" },
+      { n:"Monywa",     b:"မုံရွာ",         p:"04101" },
+      { n:"Shwebo",     b:"ရွှေဘို",        p:"04201" },
+      { n:"Katha",      b:"ကသာ",            p:"04301" },
+      { n:"Tamu",       b:"တမူ",            p:"04401" },
+      { n:"Homalin",    b:"ဟုမ္မလင်း",     p:"04501" },
+      { n:"Mawlaik",    b:"မော်လိုက်",      p:"04601" },
+      { n:"Kalay",      b:"ကလေး",           p:"04701" },
+      { n:"Hkamti",     b:"ခမ်းတီး",        p:"04801" },
+      { n:"Indaw",      b:"အင်တော",         p:"04901" },
+      { n:"Kanbalu",    b:"ကန်ပလက်",       p:"04951" },
+      { n:"Ye-U",       b:"ရေဦး",           p:"04311" },
+      { n:"Kawlin",     b:"ကောလင်း",        p:"04651" },
+      { n:"Wuntho",     b:"ဝန်သို",         p:"04701" },
+      { n:"Kalewa",     b:"ကလေဝ",          p:"04801" },
+      { n:"Chaung-U",   b:"ချောင်းဦး",     p:"04171" },
+      { n:"Budalin",    b:"ဘူးတလင်း",      p:"04161" },
+      { n:"Ayadaw",     b:"အရာတော်",        p:"04461" },
+      { n:"Yinmarbin",  b:"ရင်းမားပင်",    p:"04411" },
+      { n:"Pale",       b:"ပဲလယ်",          p:"04111" },
+      { n:"Mingin",     b:"မင်းကင်း",       p:"04851" },
+      { n:"Wetlet",     b:"ဝက်လက်",         p:"04211" },
+    ]
+  },
+  // ── SHAN STATE ────────────────────────────────────────────────────────
+  { r:"Shan State", rb:"ရှမ်းပြည်နယ်", e:"🌄",
+    cities:[
+      { n:"Taunggyi",   b:"တောင်ကြီး",     p:"06001" },
+      { n:"Lashio",     b:"လားရှိုး",       p:"06101" },
+      { n:"Kengtung",   b:"ကျိုင်းတုံ",    p:"06201" },
+      { n:"Muse",       b:"မူဆယ်",          p:"06401" },
+      { n:"Namtu",      b:"နမ့်တူး",        p:"06501" },
+      { n:"Hsipaw",     b:"သီပေါ",          p:"06701" },
+      { n:"Kyaukme",    b:"ကျောက်မဲ",      p:"06751" },
+      { n:"Tachileik",  b:"တာချီလိတ်",     p:"06951" },
+      { n:"Kalaw",      b:"ကလော",           p:"06061" },
+      { n:"Pindaya",    b:"ပင်းတယ",         p:"06251" },
+      { n:"Nyaungshwe", b:"ညောင်ရွှေ",      p:"06081" },
+      { n:"Kutkai",     b:"ကွတ်ခိုင်",      p:"06121" },
+      { n:"Mongmit",    b:"မိုင်းမိတ်",     p:"06801" },
+      { n:"Aungban",    b:"အောင်ပန်း",      p:"06071" },
+      { n:"Hopong",     b:"ဟိုပုံး",        p:"06301" },
+      { n:"Loilen",     b:"လွိုင်လင်",      p:"06301" },
+      { n:"Namhsan",    b:"နမ့်ဆန်",        p:"06601" },
+      { n:"Mong Hsat",  b:"မိုင်းဆတ်",     p:"06951" },
+      { n:"Panglong",   b:"ပင်လုံ",         p:"06131" },
+      { n:"Mongpai",    b:"မိုင်းပိုင်",    p:"06321" },
+    ]
+  },
+  // ── TANINTHARYI REGION ────────────────────────────────────────────────
+  { r:"Tanintharyi Region", rb:"တနင်္သာရီတိုင်းဒေသကြီး", e:"🌴",
+    cities:[
+      { n:"Dawei",        b:"ထားဝယ်",       p:"13001" },
+      { n:"Myeik",        b:"မြိတ်",         p:"13101" },
+      { n:"Kawthoung",    b:"ကော်သောင်း",   p:"13201" },
+      { n:"Palaw",        b:"ပလော",          p:"13301" },
+      { n:"Yebyu",        b:"ရေဗျူး",        p:"13451" },
+      { n:"Kyunsu",       b:"ကျွန်းစု",      p:"13501" },
+      { n:"Bokpyin",      b:"ဘုတ်ပြင်း",    p:"13551" },
+      { n:"Launglon",     b:"လောင်းလုံ",     p:"13651" },
+      { n:"Thayetchaung", b:"သရေချောင်း",   p:"13401" },
+      { n:"Tanintharyi",  b:"တနင်္သာရီ",    p:"13751" },
+    ]
+  },
+  // ── YANGON REGION ─────────────────────────────────────────────────────
+  { r:"Yangon Region", rb:"ရန်ကုန်တိုင်းဒေသကြီး", e:"🌆",
+    cities:[
+      { n:"Yangon (Downtown)",  b:"ရန်ကုန်မြို့လယ်",  p:"11141" },
+      { n:"Insein",             b:"အင်းစိန်",           p:"11011" },
+      { n:"Hlaing",             b:"လှိုင်",             p:"11051" },
+      { n:"Mayangone",          b:"မရမ်းကုန်း",         p:"11061" },
+      { n:"Mingaladon",         b:"မင်္ဂလာဒုံ",         p:"11031" },
+      { n:"Shwepyithar",        b:"ရွှေပြည်သာ",          p:"11021" },
+      { n:"Hlegu",              b:"လှည်းကူး",            p:"11501" },
+      { n:"Taikkyi",            b:"တိုက်ကြီး",           p:"11611" },
+      { n:"Htantabin",          b:"ထန်းတပင်",           p:"11551" },
+      { n:"Hmawbi",             b:"မမြဝ",                p:"11401" },
+      { n:"Thongwa",            b:"သောင်ရာ",             p:"11351" },
+      { n:"Kyauktan",           b:"ကျောက်တန်း",          p:"11301" },
+      { n:"Twantay",            b:"တွံတေး",              p:"11201" },
+      { n:"Dala",               b:"ဒလ",                 p:"11101" },
+      { n:"Tamwe",              b:"တာမွေ",               p:"11211" },
+      { n:"Thingangyun",        b:"သင်္ကန်းကျွန်း",      p:"11161" },
+      { n:"South Okkalapa",     b:"တောင်ဥက္ကလာပ",       p:"11161" },
+      { n:"North Okkalapa",     b:"မြောက်ဥက္ကလာပ",     p:"11131" },
+      { n:"Yankin",             b:"ရန်ကင်း",              p:"11191" },
+      { n:"Bahan",              b:"ဘားဟင်း",              p:"11201" },
+      { n:"Sanchaung",          b:"ဆင်ချောင်း",          p:"11111" },
+      { n:"Kamayut",            b:"ကမာရွတ်",             p:"11041" },
+      { n:"Ahlone",             b:"အလုံ",                p:"11121" },
+      { n:"Pabedan",            b:"ပဗေဒါ",               p:"11141" },
+      { n:"Kyimyindaing",       b:"ကြည့်မြင်တိုင်",      p:"11141" },
+      { n:"Pazundaung",         b:"ပစ္စုန်းတောင်",       p:"11221" },
+      { n:"Dagon",              b:"ဒဂုံ",                p:"11191" },
+      { n:"Dawbon",             b:"ဒေါပုံ",              p:"11231" },
+      { n:"Mingalartaungnyunt", b:"မင်္ဂလာတောင်ညွန့်",  p:"11221" },
+      { n:"Kayan",              b:"ကြော်ရံ",              p:"11801" },
+      { n:"Kawhmu",             b:"ကော့မှူး",             p:"11851" },
+      { n:"Thaketa",            b:"သာကေတ",               p:"11231" },
+      { n:"Cocokyun",           b:"ကိုကိုကျွန်း",         p:"11951" },
+      { n:"Kungyangon",         b:"ကွမ်းချောင်",         p:"11901" },
+      { n:"Seikgyikanaungto",   b:"ဆိပ်ကြီးချောင်တို",  p:"11751" },
+      { n:"Dagon Seikkan",      b:"ဒဂုံဆိပ်ကမ်း",       p:"11071" },
+    ]
+  },
+];
+
+// ── BUILD PAGE ────────────────────────────────────────────────────────────────
+
+const main = document.getElementById('main');
+const searchInput = document.getElementById('search');
+const regionFilter = document.getElementById('region-filter');
+const resultCount = document.getElementById('result-count');
+const noResults = document.getElementById('no-results');
+const totalCitiesEl = document.getElementById('total-cities');
+
+let totalCities = 0;
+DATA.forEach(r => totalCities += r.cities.length);
+totalCitiesEl.textContent = totalCities;
+
+DATA.forEach((region, ri) => {
+  // populate filter
+  const opt = document.createElement('option');
+  opt.value = region.r;
+  opt.textContent = `${region.e} ${region.r}`;
+  regionFilter.appendChild(opt);
+
+  // build section
+  const sec = document.createElement('section');
+  sec.className = 'region';
+  sec.dataset.region = region.r;
+
+  const hdr = document.createElement('div');
+  hdr.className = 'region-header';
+  hdr.innerHTML = `
+    <span class="region-flag">${region.e}</span>
+    <span class="region-name">${region.r}<br><small style="font-family:Lora,serif;font-weight:400;font-size:.75em;color:var(--muted);font-style:italic;">${region.rb}</small></span>
+    <span class="region-count">${region.cities.length}</span>
+    <span class="chevron">▼</span>
+  `;
+  hdr.addEventListener('click', () => sec.classList.toggle('collapsed'));
+
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+
+  region.cities.forEach(city => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.city = city.n.toLowerCase();
+    card.dataset.burmese = city.b;
+    card.dataset.postcode = city.p;
+    card.innerHTML = `
+      <span class="city-name">${city.n}</span>
+      <span class="city-burmese">${city.b}</span>
+      <span class="postcode">${city.p}</span>
+    `;
+    grid.appendChild(card);
+  });
+
+  sec.appendChild(hdr);
+  sec.appendChild(grid);
+  main.appendChild(sec);
+});
+
+// ── SEARCH & FILTER ───────────────────────────────────────────────────────────
+
+function applyFilter() {
+  const q = searchInput.value.toLowerCase().trim();
+  const rf = regionFilter.value;
+  let visible = 0;
+
+  document.querySelectorAll('.region').forEach(sec => {
+    const regionMatch = !rf || sec.dataset.region === rf;
+    if (!regionMatch) { sec.classList.add('hidden'); return; }
+
+    let sectionVisible = 0;
+    sec.querySelectorAll('.card').forEach(card => {
+      const match = !q ||
+        card.dataset.city.includes(q) ||
+        card.dataset.burmese.includes(q) ||
+        card.dataset.postcode.includes(q);
+      card.classList.toggle('hidden', !match);
+      if (match) { sectionVisible++; visible++; }
+    });
+
+    const hasVisible = sectionVisible > 0;
+    sec.classList.toggle('hidden', !hasVisible);
+
+    // auto-expand when searching
+    if (q && hasVisible) sec.classList.remove('collapsed');
+
+    // update count badge
+    const badge = sec.querySelector('.region-count');
+    if (badge) badge.textContent = sectionVisible;
+  });
+
+  noResults.style.display = visible === 0 ? 'block' : 'none';
+  resultCount.innerHTML = q || rf
+    ? `<span>${visible}</span> result${visible !== 1 ? 's' : ''}`
+    : '';
+}
+
+searchInput.addEventListener('input', applyFilter);
+regionFilter.addEventListener('change', applyFilter);
+
+// ── SCROLL TOP ────────────────────────────────────────────────────────────────
+const scrollBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('visible', window.scrollY > 400);
+});
+scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
